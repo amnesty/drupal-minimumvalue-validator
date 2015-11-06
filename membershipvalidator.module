@@ -20,10 +20,10 @@
         
         // Definition of the minimum amounts
         $min_amount = 48;
-        $min_reduced_amount = 24;
+        //$min_reduced_amount = 24;
         
         // Errors
-        $minerror = 'La cuota mínima es de ' . $min_amount . '€ al año o ' . $min_reduced_amount . '€ al año si eres jubilado, parado o estudiante.';
+        $minerror = 'La cuota mínima es de ' . $min_amount . '€ al año'; //'o ' . $min_reduced_amount . '€ al año si eres jubilado, parado o estudiante.';
         $zeroerror = 'La cuota no puede ser nula';
         $errors = array();
 		
@@ -65,7 +65,7 @@
                             $i++;
                         }
 				    }
-                    else if( $cuotadef*$frec < 24 ){
+                    else if( $cuotadef*$frec < $min_amount ){
                         $i=0;
                         // Mark the second box as an error, that is the amount one
                         foreach( $items as $key => $value){
