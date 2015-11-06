@@ -1,6 +1,5 @@
-drupal-iban-validator
+drupal-membership-validator
 =====================
 
-Bank Account Number Validations for the Drupal Webform Validation
-
-NOTE: This module isn't still working. We hope it will be running in a few weeks.
+Membership fee and frequency validations according to a minimum amount established
+NOTE: This module needs to be improved to allow graphical configuration.
