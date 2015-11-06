@@ -1,0 +1,84 @@
+<?php
+
+   /**
+    * Implementation of hook_webform_validation_validators().
+    */
+    function membershipvalidator_webform_validation_validators() {
+        return
+            array(
+                'validate_membership' => array(
+                    'name' => 'Validate Amount and Frequency\'s Membership',
+                    'description' => t( 'Verifies that the minimum amount is correct due to the selected frequency.' ),
+                    'component_types' => array( 'int', 'float', 'select', 'textfield' ) )
+             );
+    }
+
+   /**
+    * Implementation of hook_webform_validation_validate().
+    */
+    function membershipvalidator_webform_validation_validate($validator_name, $items, $components, $rule ) {
+        
+        // Definition of the minimum amounts
+        $min_amount = 48;
+        $min_reduced_amount = 24;
+        
+        // Errors
+        $minerror = 'La cuota mínima es de ' . $min_amount . '€ al año o ' . $min_reduced_amount . '€ al año si eres jubilado, parado o estudiante.';
+        $zeroerror = 'La cuota no puede ser nula';
+        $errors = array();
+		
+        if ( $items ) {
+            switch ( $validator_name ) {
+                case 'validate_membership':
+				    // Define one variable per field we want to check
+				    $cuota = 0;
+				    $frec = 0;
+                    $otra = 0;
+		            foreach ( $items as $key => $value ) {
+			            $component = $components[$key];
+						// Get the component class to take its value
+						$class = $component["extra"]["css_classes"];
+						switch( $class ){
+							case "frecuencia":
+								$frec = $value;
+								break;
+							case "cuota":
+								$cuota = $value;	
+								break;
+                            case "otra_cuota":
+                                $otra = $value;  
+                                break;
+						}
+		            }
+				    // We validate that the amount is over the minimum
+                    $cuotadef = ($cuota == 0 ? $otra : $cuota);
+
+				    
+				    if( $cuotadef == 0 ){
+				    	$i=0;
+                        // Mark the third box as an error, that is the other amount one
+                        foreach( $items as $key => $value){
+                            if($i==2){
+                                $errors[$key] = t( $zeroerror,
+                                     array( '%item' => $components[ $key ][ "name" ] ) );
+                            }
+                            $i++;
+                        }
+				    }
+                    else if( $cuotadef*$frec < 24 ){
+                        $i=0;
+                        // Mark the second box as an error, that is the amount one
+                        foreach( $items as $key => $value){
+                            if($i==1){
+                                $errors[$key] = t( $minerror,
+                                     array( '%item' => $components[ $key ][ "name" ] ) );
+                            }
+                            $i++;
+                        }
+                    }
+                    return $errors;
+                    break;               
+            }
+        }
+    }
+?>
