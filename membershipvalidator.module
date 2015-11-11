@@ -65,7 +65,7 @@
                             $i++;
                         }
 				    }
-                    else if( $cuotadef*$frec == $min_reduced_amount && $frec != 1 ){
+                    else if( $cuotadef == $min_reduced_amount && $frec != 1 ){
                         $i=0;
                         // Mark the first box as an error, that is the freq one
                         foreach( $items as $key => $value){
