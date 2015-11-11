@@ -20,10 +20,11 @@
         
         // Definition of the minimum amounts
         $min_amount = 48;
-        //$min_reduced_amount = 24;
+        $min_reduced_amount = 24;
         
         // Errors
-        $minerror = 'La cuota mínima es de ' . $min_amount . '€ al año'; //'o ' . $min_reduced_amount . '€ al año si eres jubilado, parado o estudiante.';
+        $minerror = 'La cuota mínima es de ' . $min_reduced_amount . '€ al año para jubilado/as, parado/as o estudiante, pero tienes que seleccionar la cuota como anual.';
+        $montherror = 'La cuota mínima mensual es de ' . $min_amount/12 . '€.';
         $zeroerror = 'La cuota no puede ser nula';
         $errors = array();
 		
@@ -52,7 +53,6 @@
 		            }
 				    // We validate that the amount is over the minimum
                     $cuotadef = ($cuota == 0 ? $otra : $cuota);
-
 				    
 				    if( $cuotadef == 0 ){
 				    	$i=0;
@@ -65,16 +65,28 @@
                             $i++;
                         }
 				    }
-                    else if( $cuotadef*$frec < $min_amount ){
+                    else if( $cuotadef*$frec == $min_reduced_amount && $frec != 1 ){
                         $i=0;
-                        // Mark the second box as an error, that is the amount one
+                        // Mark the first box as an error, that is the freq one
                         foreach( $items as $key => $value){
-                            if($i==1){
+                            if($i==0){
                                 $errors[$key] = t( $minerror,
                                      array( '%item' => $components[ $key ][ "name" ] ) );
                             }
                             $i++;
                         }
+                    }
+                    else if( $cuotadef*$frec < $min_amount) {
+                        $i=0;
+                        // Mark the second box as an error, that is the amount one
+                        foreach( $items as $key => $value){
+                            if($i==1){
+                                $errors[$key] = t( $montherror,
+                                     array( '%item' => $components[ $key ][ "name" ] ) );
+                            }
+                            $i++;
+                        }
+
                     }
                     return $errors;
                     break;               
