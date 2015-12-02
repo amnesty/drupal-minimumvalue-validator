@@ -26,6 +26,7 @@
         $minerror = 'La cuota mínima es de ' . $min_reduced_amount . '€ al año para jubilado/as, parado/as o estudiante, pero tienes que seleccionar la cuota como anual.';
         $montherror = 'La cuota mínima mensual es de ' . $min_amount/12 . '€.';
         $zeroerror = 'La cuota no puede ser nula';
+        $numericerror = 'La cuota debe ser numérica';
         $errors = array();
 		
         if ( $items ) {
@@ -55,6 +56,19 @@
                                 break;
 						}
 		            }
+                    // If other amount is selected, validate it's numeric
+                    if($otra != '' && is_numeric($otra) ){
+                        $i=0;
+                        // Mark the third box as an error, that is the other amount one
+                        foreach( $items as $key => $value){
+                            if($i==2){
+                                $errors[$key] = t( $numericerror,
+                                     array( '%item' => $components[ $key ][ "name" ] ) );
+                            }
+                            $i++;
+                        }
+                    }
+
 				    // We validate that the amount is over the minimum
                     $cuotadef = ($cuota == 0 ? $otra : $cuota);
 				    
