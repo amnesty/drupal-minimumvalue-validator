@@ -57,17 +57,18 @@
 						}
 		            }
                     // If other amount is selected, validate it's numeric
-                    if( 1 ){
+                    if($otra != '' && !is_numeric($otra) ){
                         $i=0;
                         // Mark the third box as an error, that is the other amount one
                         foreach( $items as $key => $value){
                             if($i==2){
-                                $errors[$key] = t( $otra . " " . $numericerror,
+                                $errors[$key] = t( $numericerror,
                                      array( '%item' => $components[ $key ][ "name" ] ) );
                             }
                             $i++;
                         }
                     }
+                    return $errors;
 
 				    // We validate that the amount is over the minimum
                     $cuotadef = ($cuota == 0 ? $otra : $cuota);
