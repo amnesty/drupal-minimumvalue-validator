@@ -37,6 +37,10 @@
                     $otra = 0;
 		            foreach ( $items as $key => $value ) {
 			            $component = $components[$key];
+                        // Set the value to 0 if it's an empty string
+                        if($value == ''){
+                            $value = 0;
+                        }
 						// Get the component class to take its value
 						$class = $component["extra"]["css_classes"];
 						switch( $class ){
