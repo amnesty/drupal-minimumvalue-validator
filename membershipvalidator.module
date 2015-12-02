@@ -57,7 +57,7 @@
 						}
 		            }
                     // If other amount is selected, validate it's numeric
-                    if($otra != '' && is_numeric($otra) ){
+                    if($otra != '' && !is_numeric($otra) ){
                         $i=0;
                         // Mark the third box as an error, that is the other amount one
                         foreach( $items as $key => $value){
