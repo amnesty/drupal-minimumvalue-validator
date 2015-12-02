@@ -67,8 +67,8 @@
                             }
                             $i++;
                         }
+                        return $errors;
                     }
-                    return $errors;
 
 				    // We validate that the amount is over the minimum
                     $cuotadef = ($cuota == 0 ? $otra : $cuota);
