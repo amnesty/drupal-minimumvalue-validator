@@ -100,7 +100,7 @@
                         // Mark the second box as an error, that is the amount one
                         foreach( $items as $key => $value){
                             if($i==1){
-                                $errors[$key] = t( $montherror,
+                                $errors[$key] = t( $frec ." ". $cuotadef ." ". $montherror,
                                      array( '%item' => $components[ $key ][ "name" ] ) );
                             }
                             $i++;
