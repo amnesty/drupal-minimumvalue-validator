@@ -43,7 +43,8 @@
                             $value = 0;
                         }
 						// Get the component class to take its value
-						$class = explode(" ", $component["extra"]["css_classes"])[0];
+						$class_exp = explode(" ", $component["extra"]["css_classes"]);
+                        $class = $class_exp[0];
 						switch( $class ){
 							case "frecuencia":
 								$frec = $value;
