@@ -23,8 +23,8 @@
         $min_reduced_amount = 24;
         
         // Errors
-        $minerror = 'La cuota mínima es de ' . $min_reduced_amount . '€ al año para jubilado/as, parado/as o estudiante, pero tienes que seleccionar la cuota como anual.';
-        $montherror = 'La cuota mínima mensual es de ' . $min_amount/12 . '€.';
+        $minerror = 'La cuota mínima es de ' . $min_reduced_amount . '€ al año para jubilado/as, parado/as o estudiantes, pero tienes que seleccionar la cuota como anual.';
+        $montherror = 'La cuota mínima es de ' . $min_amount/12 . '€ mensuales o de ' . $min_amount . '€ anuales.' ;
         $zeroerror = 'La cuota no puede ser nula';
         $numericerror = 'La cuota debe ser numérica';
         $errors = array();
@@ -43,7 +43,7 @@
                             $value = 0;
                         }
 						// Get the component class to take its value
-						$class = $component["extra"]["css_classes"];
+						$class = explode(" ", $component["extra"]["css_classes"])[0];
 						switch( $class ){
 							case "frecuencia":
 								$frec = $value;
@@ -84,7 +84,7 @@
                             $i++;
                         }
 				    }
-                    else if( $cuotadef*$frec == $min_reduced_amount && $frec != 1 ){
+                    else if( $cuotadef*$frec <= $min_reduced_amount && $frec != 1 ){
                         $i=0;
                         // Mark the first box as an error, that is the freq one
                         foreach( $items as $key => $value){
@@ -97,10 +97,10 @@
                     }
                     else if( $cuotadef*$frec < $min_amount) {
                         $i=0;
-                        // Mark the second box as an error, that is the amount one
+                        // Mark the first box as an error, that is the amount one
                         foreach( $items as $key => $value){
-                            if($i==1){
-                                $errors[$key] = t( $frec ." ". $cuotadef ." ". $montherror,
+                            if($i==0){
+                                $errors[$key] = t( $montherror,
                                      array( '%item' => $components[ $key ][ "name" ] ) );
                             }
                             $i++;
