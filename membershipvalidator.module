@@ -90,7 +90,7 @@
                         // Mark the first box as an error, that is the freq one
                         foreach( $items as $key => $value){
                             if($i==0){
-                                $errors[$key] = t( $minerror,
+                                $errors[$key] = t( $montherror,
                                      array( '%item' => $components[ $key ][ "name" ] ) );
                             }
                             $i++;
