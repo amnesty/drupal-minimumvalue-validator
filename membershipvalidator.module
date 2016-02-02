@@ -23,10 +23,10 @@
         $min_reduced_amount = 24;
         
         // Errors
-        $minerror = 'La cuota mínima es de ' . $min_reduced_amount . '€ al año para jubilado/as, parado/as o estudiantes, pero tienes que seleccionar la cuota como anual.';
-        $montherror = 'La cuota mínima es de ' . $min_amount/12 . '€ mensuales o de ' . $min_amount . '€ anuales.' ;
-        $zeroerror = 'La cuota no puede ser nula';
-        $numericerror = 'La cuota debe ser numérica';
+        //$minerror = 'La cuota mínima es de ' . $min_reduced_amount . '€ al año para jubilado/as, parado/as o estudiantes, pero tienes que seleccionar la cuota como anual.';
+        $montherror = 'La cuota mínima es de ' . $min_amount/12 . '€ mensuales o de ' . $min_amount . '€ anuales. En el caso de personas jubiladas, en paro o estudiantes, la cuota mínima es de ' . $min_reduced_amount . '€ anuales.' ;
+        $zeroerror = 'Has olvidado indicar tu aportación.';
+        $numericerror = 'La cuota debe ser numérica.';
         $errors = array();
 		
         if ( $items ) {
