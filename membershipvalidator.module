@@ -78,7 +78,7 @@
 				    	$i=0;
                         // Mark the third box as an error, that is the other amount one
                         foreach( $items as $key => $value){
-                            if($i==2){
+                            if($i==1){ 
                                 $errors[$key] = t( $zeroerror,
                                      array( '%item' => $components[ $key ][ "name" ] ) );
                             }
