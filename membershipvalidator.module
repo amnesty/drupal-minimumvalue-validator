@@ -85,7 +85,7 @@
                             $i++;
                         }
 				    }
-                    else if( ($cuotadef*$frec < $min_reduced_amount && $frec == 1) || ($cuotadef*$frec >= $min_reduced_amount && $cuotadef*$frec < $min_amount && $frec != 1) ){
+                    /*else if( ($cuotadef*$frec < $min_reduced_amount && $frec == 1) || ($cuotadef*$frec >= $min_reduced_amount && $cuotadef*$frec < $min_amount && $frec != 1) ){
                         $i=0;
                         // Mark the first box as an error, that is the freq one
                         foreach( $items as $key => $value){
@@ -95,7 +95,7 @@
                             }
                             $i++;
                         }
-                    }
+                    }*/
                     else if( $cuotadef*$frec < $min_reduced_amount) {
                         $i=0;
                         // Mark the first box as an error, that is the amount one
