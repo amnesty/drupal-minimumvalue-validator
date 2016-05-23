@@ -96,7 +96,7 @@
                             $i++;
                         }
                     }
-                    /*else if( $cuotadef*$frec < $min_reduced_amount) {
+                    else if( $cuotadef*$frec < $min_reduced_amount) {
                         $i=0;
                         // Mark the first box as an error, that is the amount one
                         foreach( $items as $key => $value){
@@ -107,7 +107,7 @@
                             $i++;
                         }
 
-                    }*/
+                    }
                     return $errors;
                     break;               
             }
