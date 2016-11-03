@@ -34,7 +34,6 @@
                         $value_def = str_replace(",", ".", $value);
               		      $donativo = floatval($value_def);
       		        }
-                  var_dump($donativo);
       				    if( $donativo < $min_amount ){
                         // Mark the third box as an error, that is the other amount one
                         foreach( $items as $key => $value){
