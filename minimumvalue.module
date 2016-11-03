@@ -9,7 +9,7 @@
                 'validate_minimum_value' => array(
                     'name' => 'Validates Minimum Amount',
                     'description' => t( 'Verifies that the minimum amount is correct due to the selected frequency.' ),
-                    'component_types' => array( 'int', 'float', 'number' ) )
+                    'component_types' => array( 'int', 'number' ) )
              );
     }
 
@@ -19,30 +19,28 @@
     function minimumvalue_webform_validation_validate($validator_name, $items, $components, $rule ) {
 
         // Definition of the minimum amounts
-        $min_amount = 0.1;
+        $min_amount = floatval(0.01);
 
         // Errors
-        $error = 'La cantidad mínima permitida tiene que ser superior a ' . $min_amount . '. Revísala, por favor. ¡Gracias!' ;
+        $error = 'Ha habido un error con la cantidad aportada introducida. Revísala, por favor. ¡Gracias!' ;
         $errors = array();
 
         if ( $items ) {
             switch ( $validator_name ) {
                 case 'validate_minimum_value':
       				    // Define one variable per field we want to check
-      				    $donativo = 0;
+                  $donativo = 0;
       		        foreach ( $items as $key => $value ) {
-              		      $donativo = $value;
+                        $value_def = str_replace(",", ".", $value);
+              		      $donativo = floatval($value_def);
       		        }
-      				    if( $donativo <= $min_amount ){
-      				    	    $i=0;
+                  var_dump($donativo);
+      				    if( $donativo < $min_amount ){
                         // Mark the third box as an error, that is the other amount one
                         foreach( $items as $key => $value){
-                          if($i==2){
-                            $errors[$key] = t( $error,
+                          $errors[$key] = t( $error,
                               array( '%item' => $components[ $key ][ "name" ] ) );
-                            }
-                            $i++;
-                          }
+                        }
       				    }
                   return $errors;
                   break;
