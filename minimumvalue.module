@@ -7,9 +7,9 @@
         return
             array(
                 'validate_minimum_value' => array(
-                    'name' => 'Validate Amount and Frequency\'s Membership',
+                    'name' => 'Validates Minimum Amount',
                     'description' => t( 'Verifies that the minimum amount is correct due to the selected frequency.' ),
-                    'component_types' => array( 'int', 'float' ) )
+                    'component_types' => array( 'int', 'float', 'number' ) )
              );
     }
 
